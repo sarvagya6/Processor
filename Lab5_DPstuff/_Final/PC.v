@@ -5,7 +5,8 @@ input clk;
 output reg [31:0] addrout; //32 bit address out
 
 
-always@(posedge clk) begin
+always@(*) begin
 	addrout <= addrin;
-end 
+end
+
 endmodule

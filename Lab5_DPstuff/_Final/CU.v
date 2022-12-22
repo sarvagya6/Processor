@@ -9,6 +9,18 @@ output reg [3:0] aluOp;
 
 integer count = 0;
 
+	initial begin
+		regWEN = 0;
+		immSel = 0;
+		bSel = 0;
+		aSel = 0;
+		memRW = 0;
+		regSel = 0;
+		pcSel = 0;
+		brUn = 0;
+		aluOp = 4'b0;
+	end
+	
 
 	always @(posedge clk) begin
 /*	
@@ -24,6 +36,8 @@ integer count = 0;
 		regWEN = 0;
 	end	
 */
+
+		
 		
 	//Changes regWEN every 3 and 5 cycles
 	if (count<5) begin
@@ -242,7 +256,7 @@ integer count = 0;
 							memRW = 0;
 							regSel = 0;
 							pcSel = 1;
-							aluOp = 0101;
+							aluOp = 4'b0101;
 							//regWE = 0;
 							brUn = 0;
 							end

@@ -1,4 +1,4 @@
-module branch_comp(opA, opB, beq, blt, brUn);
+module BrComp(opA, opB, beq, blt, brUn);
 	input [31:0]opA, opB;
 	input brUn;
 	output reg beq, blt;

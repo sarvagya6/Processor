@@ -8,7 +8,6 @@ input clk;
 //CU, RegFile, ALU, DMem, Immsinext, IMem, PC, BrComp, AddFour
 
 wire [31:0] ins;
-wire clk;
 
 wire regWEN, immSel, bSel, aSel, memRW, regSel, pcSel, brUn;
 wire [3:0] aluOp;
@@ -46,9 +45,9 @@ BrComp BrComp1(.opA(regOutA), .opB(regOutB), .brUn(brUn) ,.beq(beq), .blt(blt));
 ALU ALU1(.op(aluOp), .a(aluA), .b(aluB), .out(aluout));
 DMem DMem1(.addr(aluout), .din(regOutB), .dout(dMemOut), .memRW(memRW), .clk(clk));
 AddFour AddFour1(.addrin(pcOut), .addrout(addrout), .clk(clk));
-Immsinext Immsinext1(.in(ins), .imm_out(immsinextOut), .immSel(immSel), .clk(clk));
+Immsinext Immsinext1(.in(ins), .immOut(immsinextOut), .immSel(immSel));
 PC PC1(.addrin(pcIn), .addrout(pcOut), .clk(clk));
-Mux_2x1 PCSelMux1(.sel(pcSel), .in_0(addrout), .in_1(immsinextOut), .out(pcIn));
+Mux_2x1 PCSelMux1(.sel(pcSel), .in_0(addrout), .in_1(aluout), .out(pcIn));
 Mux_2x1 RegDinMux1(.sel(regSel), .in_0(dMemOut), .in_1(aluout), .out(din));
 Mux_2x1 AMux1(.sel(aSel), .in_0(regOutA), .in_1(pcOut), .out(aluA));
 Mux_2x1 BMux1(.sel(bSel), .in_0(regOutB), .in_1(immsinextOut), .out(aluB));
